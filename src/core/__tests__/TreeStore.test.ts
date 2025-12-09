@@ -16,6 +16,7 @@ describe('TreeStore', () => {
 
   beforeEach(() => {
     store = new TreeStore();
+    store.update(getMockItems());
   });
 
   describe('update', () => {
@@ -28,7 +29,7 @@ describe('TreeStore', () => {
     });
 
     it('should rebuild indexes when called multiple times', () => {
-      store.update(getMockItems());
+
 
       const newItems: ITreeItem[] = [
         { id: 10, parent: null, label: 'New Root' },
@@ -62,6 +63,8 @@ describe('TreeStore', () => {
     });
 
     it('should return empty array when no items', () => {
+      store.update([]);
+
       const result = store.getAll();
 
       expect(result).toEqual([]);
@@ -70,10 +73,6 @@ describe('TreeStore', () => {
   });
 
   describe('getItem', () => {
-    beforeEach(() => {
-      store.update(getMockItems());
-    });
-
     it.each`
       id    | expectedLabel
       ${1}  | ${'Root'}
@@ -97,7 +96,7 @@ describe('TreeStore', () => {
 
   describe('getChildren', () => {
     beforeEach(() => {
-      store.update(getMockItems());
+
     });
 
     it.each`
@@ -116,10 +115,6 @@ describe('TreeStore', () => {
   });
 
   describe('getAllChildren', () => {
-    beforeEach(() => {
-      store.update(getMockItems());
-    });
-
     it.each`
       parentId | expectedIds           | expectedCount | description
       ${1}     | ${[2, 4, 5, 3, 6]}    | ${5}          | ${'returns all descendants of root'}
@@ -137,7 +132,7 @@ describe('TreeStore', () => {
 
   describe('getAllParents', () => {
     beforeEach(() => {
-      store.update(getMockItems());
+
     });
 
     it.each`
@@ -163,10 +158,6 @@ describe('TreeStore', () => {
   });
 
   describe('addItem', () => {
-    beforeEach(() => {
-      store.update(getMockItems());
-    });
-
     it('should add new item to the store', () => {
       const newItem: ITreeItem = { id: 7, parent: 1, label: 'New Child' };
 
@@ -207,7 +198,7 @@ describe('TreeStore', () => {
 
   describe('removeItem', () => {
     beforeEach(() => {
-      store.update(getMockItems());
+
     });
 
     it('should remove item from store', () => {
@@ -252,10 +243,6 @@ describe('TreeStore', () => {
   });
 
   describe('updateItem', () => {
-    beforeEach(() => {
-      store.update(getMockItems());
-    });
-
     it('should update item properties', () => {
       const updatedItem: ITreeItem = { id: 4, parent: 2, label: 'Updated Label' };
 
