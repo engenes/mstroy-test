@@ -29,8 +29,6 @@ describe('TreeStore', () => {
     });
 
     it('should rebuild indexes when called multiple times', () => {
-
-
       const newItems: ITreeItem[] = [
         { id: 10, parent: null, label: 'New Root' },
         { id: 20, parent: 10, label: 'New Child' },
@@ -95,10 +93,6 @@ describe('TreeStore', () => {
   });
 
   describe('getChildren', () => {
-    beforeEach(() => {
-
-    });
-
     it.each`
       parentId | childrenIds      | childrenCount | description
       ${1}     | ${[2, 3]}        | ${2}          | ${'returns direct children of root'}
@@ -131,10 +125,6 @@ describe('TreeStore', () => {
   });
 
   describe('getAllParents', () => {
-    beforeEach(() => {
-
-    });
-
     it.each`
       childId | expectedIds  | expectedCount | description
       ${4}    | ${[4, 2, 1]} | ${3}          | ${'returns parent chain for deeply nested node'}
@@ -197,10 +187,6 @@ describe('TreeStore', () => {
   });
 
   describe('removeItem', () => {
-    beforeEach(() => {
-
-    });
-
     it('should remove item from store', () => {
       const result = store.removeItem(6);
 
